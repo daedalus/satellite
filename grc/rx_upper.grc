@@ -1080,6 +1080,65 @@
     </param>
   </block>
   <block>
+    <key>blks2_tcp_source</key>
+    <param>
+      <key>addr</key>
+      <value>src_ip</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(40, 452)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blks2_tcp_source_0</value>
+    </param>
+    <param>
+      <key>maxoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>minoutbuf</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>server</key>
+      <value>False</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_char_to_float</key>
     <param>
       <key>alias</key>
@@ -1273,69 +1332,6 @@
     <param>
       <key>type</key>
       <value>"UDP_CLIENT"</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_udp_source</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(40, 544)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_udp_source_0</value>
-    </param>
-    <param>
-      <key>ipaddr</key>
-      <value>src_ip</value>
-    </param>
-    <param>
-      <key>maxoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>minoutbuf</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>eof</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>psize</key>
-      <value>payload_size</value>
-    </param>
-    <param>
-      <key>port</key>
-      <value>port</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
     </param>
   </block>
   <block>
@@ -2128,7 +2124,7 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1528, 100)</value>
+      <value>(1504, 100)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2234,11 +2230,11 @@
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(248, 380)</value>
+      <value>(232, 452)</value>
     </param>
     <param>
       <key>gui_hint</key>
-      <value></value>
+      <value>tabs@0</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2498,7 +2494,7 @@
     </param>
     <param>
       <key>name</key>
-      <value>""</value>
+      <value>"Incoming Symbols"</value>
     </param>
     <param>
       <key>nconnections</key>
@@ -2593,7 +2589,7 @@
     </param>
     <param>
       <key>gui_hint</key>
-      <value>tabs@5:1,0</value>
+      <value>tabs@1:1,0</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -2956,7 +2952,7 @@
     </param>
     <param>
       <key>gui_hint</key>
-      <value>tabs@5:0,0</value>
+      <value>tabs@1:0,0</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3358,11 +3354,11 @@
     </param>
     <param>
       <key>label0</key>
-      <value>SNR</value>
+      <value>Symbols</value>
     </param>
     <param>
       <key>label1</key>
-      <value>Frame Sync</value>
+      <value>Demodulation</value>
     </param>
     <param>
       <key>label10</key>
@@ -3406,23 +3402,23 @@
     </param>
     <param>
       <key>label2</key>
-      <value>Freq. Sync</value>
+      <value></value>
     </param>
     <param>
       <key>label3</key>
-      <value>Timing Sync</value>
+      <value></value>
     </param>
     <param>
       <key>label4</key>
-      <value>Phase Sync</value>
+      <value></value>
     </param>
     <param>
       <key>label5</key>
-      <value>Demodulation</value>
+      <value></value>
     </param>
     <param>
       <key>label6</key>
-      <value>Auto. Gain Control</value>
+      <value></value>
     </param>
     <param>
       <key>label7</key>
@@ -3438,9 +3434,21 @@
     </param>
     <param>
       <key>num_tabs</key>
-      <value>7</value>
+      <value>2</value>
     </param>
   </block>
+  <connection>
+    <source_block_id>blks2_tcp_source_0</source_block_id>
+    <sink_block_id>digital_constellation_decoder_cb_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
+  <connection>
+    <source_block_id>blks2_tcp_source_0</source_block_id>
+    <sink_block_id>qtgui_const_sink_x_0</sink_block_id>
+    <source_key>0</source_key>
+    <sink_key>0</sink_key>
+  </connection>
   <connection>
     <source_block_id>blocks_char_to_float_0_0</source_block_id>
     <sink_block_id>qtgui_time_sink_x_1_0</sink_block_id>
@@ -3456,18 +3464,6 @@
   <connection>
     <source_block_id>blocks_pack_k_bits_bb_1</source_block_id>
     <sink_block_id>blocks_char_to_float_0_1</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_udp_source_0</source_block_id>
-    <sink_block_id>digital_constellation_decoder_cb_0</sink_block_id>
-    <source_key>0</source_key>
-    <sink_key>0</sink_key>
-  </connection>
-  <connection>
-    <source_block_id>blocks_udp_source_0</source_block_id>
-    <sink_block_id>qtgui_const_sink_x_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

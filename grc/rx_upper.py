@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rx Upper
-# Generated: Wed Apr 25 22:48:36 2018
+# Generated: Wed Apr 25 23:12:30 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -24,6 +24,7 @@ from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
+from grc_gnuradio import blks2 as grc_blks2
 from math import *
 from optparse import OptionParser
 import framers
@@ -127,37 +128,12 @@ class rx_upper(gr.top_block, Qt.QWidget):
         self.tabs_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_0)
         self.tabs_grid_layout_0 = Qt.QGridLayout()
         self.tabs_layout_0.addLayout(self.tabs_grid_layout_0)
-        self.tabs.addTab(self.tabs_widget_0, 'SNR')
+        self.tabs.addTab(self.tabs_widget_0, 'Symbols')
         self.tabs_widget_1 = Qt.QWidget()
         self.tabs_layout_1 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_1)
         self.tabs_grid_layout_1 = Qt.QGridLayout()
         self.tabs_layout_1.addLayout(self.tabs_grid_layout_1)
-        self.tabs.addTab(self.tabs_widget_1, 'Frame Sync')
-        self.tabs_widget_2 = Qt.QWidget()
-        self.tabs_layout_2 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_2)
-        self.tabs_grid_layout_2 = Qt.QGridLayout()
-        self.tabs_layout_2.addLayout(self.tabs_grid_layout_2)
-        self.tabs.addTab(self.tabs_widget_2, 'Freq. Sync')
-        self.tabs_widget_3 = Qt.QWidget()
-        self.tabs_layout_3 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_3)
-        self.tabs_grid_layout_3 = Qt.QGridLayout()
-        self.tabs_layout_3.addLayout(self.tabs_grid_layout_3)
-        self.tabs.addTab(self.tabs_widget_3, 'Timing Sync')
-        self.tabs_widget_4 = Qt.QWidget()
-        self.tabs_layout_4 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_4)
-        self.tabs_grid_layout_4 = Qt.QGridLayout()
-        self.tabs_layout_4.addLayout(self.tabs_grid_layout_4)
-        self.tabs.addTab(self.tabs_widget_4, 'Phase Sync')
-        self.tabs_widget_5 = Qt.QWidget()
-        self.tabs_layout_5 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_5)
-        self.tabs_grid_layout_5 = Qt.QGridLayout()
-        self.tabs_layout_5.addLayout(self.tabs_grid_layout_5)
-        self.tabs.addTab(self.tabs_widget_5, 'Demodulation')
-        self.tabs_widget_6 = Qt.QWidget()
-        self.tabs_layout_6 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_6)
-        self.tabs_grid_layout_6 = Qt.QGridLayout()
-        self.tabs_layout_6.addLayout(self.tabs_grid_layout_6)
-        self.tabs.addTab(self.tabs_widget_6, 'Auto. Gain Control')
+        self.tabs.addTab(self.tabs_widget_1, 'Demodulation')
         self.top_layout.addWidget(self.tabs)
         self.framers_gr_hdlc_deframer_b_0 = framers.gr_hdlc_deframer_b(0)
 
@@ -218,7 +194,7 @@ class rx_upper(gr.top_block, Qt.QWidget):
             self.qtgui_time_sink_x_1_0_0.set_line_alpha(i, alphas[i])
 
         self._qtgui_time_sink_x_1_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_1_0_0.pyqwidget(), Qt.QWidget)
-        self.tabs_grid_layout_5.addWidget(self._qtgui_time_sink_x_1_0_0_win, 0,0)
+        self.tabs_grid_layout_1.addWidget(self._qtgui_time_sink_x_1_0_0_win, 0,0)
         self.qtgui_time_sink_x_1_0 = qtgui.time_sink_f(
         	1024, #size
         	phy_bit_rate, #samp_rate
@@ -265,10 +241,10 @@ class rx_upper(gr.top_block, Qt.QWidget):
             self.qtgui_time_sink_x_1_0.set_line_alpha(i, alphas[i])
 
         self._qtgui_time_sink_x_1_0_win = sip.wrapinstance(self.qtgui_time_sink_x_1_0.pyqwidget(), Qt.QWidget)
-        self.tabs_grid_layout_5.addWidget(self._qtgui_time_sink_x_1_0_win, 1,0)
+        self.tabs_grid_layout_1.addWidget(self._qtgui_time_sink_x_1_0_win, 1,0)
         self.qtgui_const_sink_x_0 = qtgui.const_sink_c(
         	1024, #size
-        	"", #name
+        	"Incoming Symbols", #name
         	1 #number of inputs
         )
         self.qtgui_const_sink_x_0.set_update_time(0.10)
@@ -306,27 +282,32 @@ class rx_upper(gr.top_block, Qt.QWidget):
             self.qtgui_const_sink_x_0.set_line_alpha(i, alphas[i])
 
         self._qtgui_const_sink_x_0_win = sip.wrapinstance(self.qtgui_const_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_layout.addWidget(self._qtgui_const_sink_x_0_win)
+        self.tabs_layout_0.addWidget(self._qtgui_const_sink_x_0_win)
         self.mods_turbo_decoder_0 = mods.turbo_decoder(codeword_len, dataword_len)
         self.mods_fifo_async_sink_0 = mods.fifo_async_sink('/tmp/async_rx')
         self.digital_map_bb_0_0_0 = digital.map_bb(([1,- 1]))
         self.digital_descrambler_bb_0 = digital.descrambler_bb(0x21, 0x7F, 16)
         self.digital_constellation_decoder_cb_0 = digital.constellation_decoder_cb(constellation.base())
         self.blocks_unpack_k_bits_bb_0 = blocks.unpack_k_bits_bb(constellation.bits_per_symbol())
-        self.blocks_udp_source_0 = blocks.udp_source(gr.sizeof_gr_complex*1, src_ip, port, payload_size, True)
         self.blocks_pack_k_bits_bb_1 = blocks.pack_k_bits_bb(8)
         self.blocks_char_to_float_0_1 = blocks.char_to_float(1, 1)
         self.blocks_char_to_float_0_0 = blocks.char_to_float(1, 1)
+        self.blks2_tcp_source_0 = grc_blks2.tcp_source(
+        	itemsize=gr.sizeof_gr_complex*1,
+        	addr=src_ip,
+        	port=port,
+        	server=False,
+        )
 
         ##################################################
         # Connections
         ##################################################
         self.msg_connect((self.framers_gr_hdlc_deframer_b_0, 'pdu'), (self.mods_fifo_async_sink_0, 'async_pdu'))
+        self.connect((self.blks2_tcp_source_0, 0), (self.digital_constellation_decoder_cb_0, 0))
+        self.connect((self.blks2_tcp_source_0, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.blocks_char_to_float_0_0, 0), (self.qtgui_time_sink_x_1_0, 0))
         self.connect((self.blocks_char_to_float_0_1, 0), (self.qtgui_time_sink_x_1_0_0, 0))
         self.connect((self.blocks_pack_k_bits_bb_1, 0), (self.blocks_char_to_float_0_1, 0))
-        self.connect((self.blocks_udp_source_0, 0), (self.digital_constellation_decoder_cb_0, 0))
-        self.connect((self.blocks_udp_source_0, 0), (self.qtgui_const_sink_x_0, 0))
         self.connect((self.blocks_unpack_k_bits_bb_0, 0), (self.digital_map_bb_0_0_0, 0))
         self.connect((self.digital_constellation_decoder_cb_0, 0), (self.blocks_unpack_k_bits_bb_0, 0))
         self.connect((self.digital_descrambler_bb_0, 0), (self.blocks_char_to_float_0_0, 0))

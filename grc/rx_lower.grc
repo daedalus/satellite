@@ -1158,6 +1158,57 @@
     </param>
   </block>
   <block>
+    <key>blks2_tcp_sink</key>
+    <param>
+      <key>addr</key>
+      <value>ip</value>
+    </param>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>affinity</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
+      <value>(1168, 1068)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>blks2_tcp_sink_0</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>complex</value>
+    </param>
+    <param>
+      <key>server</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>port</key>
+      <value>port</value>
+    </param>
+    <param>
+      <key>vlen</key>
+      <value>1</value>
+    </param>
+  </block>
+  <block>
     <key>blocks_divide_xx</key>
     <param>
       <key>alias</key>
@@ -1296,108 +1347,6 @@
     <param>
       <key>minoutbuf</key>
       <value>0</value>
-    </param>
-  </block>
-  <block>
-    <key>blocks_udp_sink</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value>Send to Constellation Receiver</value>
-    </param>
-    <param>
-      <key>affinity</key>
-      <value></value>
-    </param>
-    <param>
-      <key>ipaddr</key>
-      <value>dest_ip</value>
-    </param>
-    <param>
-      <key>port</key>
-      <value>port</value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1144, 1040)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>blocks_udp_sink_0</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>complex</value>
-    </param>
-    <param>
-      <key>psize</key>
-      <value>payload_size</value>
-    </param>
-    <param>
-      <key>eof</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>vlen</key>
-      <value>1</value>
-    </param>
-  </block>
-  <block>
-    <key>parameter</key>
-    <param>
-      <key>alias</key>
-      <value></value>
-    </param>
-    <param>
-      <key>comment</key>
-      <value></value>
-    </param>
-    <param>
-      <key>_enabled</key>
-      <value>True</value>
-    </param>
-    <param>
-      <key>_coordinate</key>
-      <value>(1368, 248)</value>
-    </param>
-    <param>
-      <key>_rotation</key>
-      <value>0</value>
-    </param>
-    <param>
-      <key>id</key>
-      <value>dest_ip</value>
-    </param>
-    <param>
-      <key>label</key>
-      <value>Destination IP</value>
-    </param>
-    <param>
-      <key>short_id</key>
-      <value></value>
-    </param>
-    <param>
-      <key>hide</key>
-      <value>none</value>
-    </param>
-    <param>
-      <key>type</key>
-      <value>string</value>
-    </param>
-    <param>
-      <key>value</key>
-      <value></value>
     </param>
   </block>
   <block>
@@ -1988,6 +1937,53 @@
     </param>
     <param>
       <key>_coordinate</key>
+      <value>(1368, 248)</value>
+    </param>
+    <param>
+      <key>_rotation</key>
+      <value>0</value>
+    </param>
+    <param>
+      <key>id</key>
+      <value>ip</value>
+    </param>
+    <param>
+      <key>label</key>
+      <value>Local IP</value>
+    </param>
+    <param>
+      <key>short_id</key>
+      <value></value>
+    </param>
+    <param>
+      <key>hide</key>
+      <value>none</value>
+    </param>
+    <param>
+      <key>type</key>
+      <value>string</value>
+    </param>
+    <param>
+      <key>value</key>
+      <value></value>
+    </param>
+  </block>
+  <block>
+    <key>parameter</key>
+    <param>
+      <key>alias</key>
+      <value></value>
+    </param>
+    <param>
+      <key>comment</key>
+      <value></value>
+    </param>
+    <param>
+      <key>_enabled</key>
+      <value>True</value>
+    </param>
+    <param>
+      <key>_coordinate</key>
       <value>(936, 4)</value>
     </param>
     <param>
@@ -2393,7 +2389,7 @@ from function probe</value>
     </param>
     <param>
       <key>_coordinate</key>
-      <value>(1496, 248)</value>
+      <value>(1472, 248)</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -3880,7 +3876,7 @@ from function probe</value>
     </param>
     <param>
       <key>gui_hint</key>
-      <value>tabs@6</value>
+      <value>tabs@5</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -5555,7 +5551,7 @@ from function probe</value>
     </param>
     <param>
       <key>gui_hint</key>
-      <value>tabs@6</value>
+      <value>tabs@5</value>
     </param>
     <param>
       <key>_rotation</key>
@@ -9100,11 +9096,11 @@ from function probe</value>
     </param>
     <param>
       <key>label5</key>
-      <value>Demodulation</value>
+      <value>Auto. Gain Control</value>
     </param>
     <param>
       <key>label6</key>
-      <value>Auto. Gain Control</value>
+      <value></value>
     </param>
     <param>
       <key>label7</key>
@@ -9120,7 +9116,7 @@ from function probe</value>
     </param>
     <param>
       <key>num_tabs</key>
-      <value>7</value>
+      <value>6</value>
     </param>
   </block>
   <block>
@@ -9389,7 +9385,7 @@ from function probe</value>
   </connection>
   <connection>
     <source_block_id>mods_da_carrier_phase_rec_0_0</source_block_id>
-    <sink_block_id>blocks_udp_sink_0</sink_block_id>
+    <sink_block_id>blks2_tcp_sink_0</sink_block_id>
     <source_key>0</source_key>
     <sink_key>0</sink_key>
   </connection>

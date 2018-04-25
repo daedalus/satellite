@@ -3,7 +3,7 @@
 ##################################################
 # GNU Radio Python Flow Graph
 # Title: Rx Lower
-# Generated: Wed Apr 25 22:48:35 2018
+# Generated: Wed Apr 25 23:22:11 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -24,6 +24,7 @@ from gnuradio import gr
 from gnuradio import qtgui
 from gnuradio.eng_option import eng_option
 from gnuradio.filter import firdes
+from grc_gnuradio import blks2 as grc_blks2
 from math import *
 from optparse import OptionParser
 import mods
@@ -39,7 +40,7 @@ from gnuradio import qtgui
 
 class rx_lower(gr.top_block, Qt.QWidget):
 
-    def __init__(self, dest_ip='', fft_len=2048, fllbw=0.002, frame_sync_verbosity=1, freq=0, freq_rec_alpha=0.001, gain=40, loopbw=100, loopbw_0=100, poll_rate=100, port=5201):
+    def __init__(self, fft_len=2048, fllbw=0.002, frame_sync_verbosity=1, freq=0, freq_rec_alpha=0.001, gain=40, ip='', loopbw=100, loopbw_0=100, poll_rate=100, port=5201):
         gr.top_block.__init__(self, "Rx Lower")
         Qt.QWidget.__init__(self)
         self.setWindowTitle("Rx Lower")
@@ -66,13 +67,13 @@ class rx_lower(gr.top_block, Qt.QWidget):
         ##################################################
         # Parameters
         ##################################################
-        self.dest_ip = dest_ip
         self.fft_len = fft_len
         self.fllbw = fllbw
         self.frame_sync_verbosity = frame_sync_verbosity
         self.freq = freq
         self.freq_rec_alpha = freq_rec_alpha
         self.gain = gain
+        self.ip = ip
         self.loopbw = loopbw
         self.loopbw_0 = loopbw_0
         self.poll_rate = poll_rate
@@ -175,12 +176,7 @@ class rx_lower(gr.top_block, Qt.QWidget):
         self.tabs_layout_5 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_5)
         self.tabs_grid_layout_5 = Qt.QGridLayout()
         self.tabs_layout_5.addLayout(self.tabs_grid_layout_5)
-        self.tabs.addTab(self.tabs_widget_5, 'Demodulation')
-        self.tabs_widget_6 = Qt.QWidget()
-        self.tabs_layout_6 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.tabs_widget_6)
-        self.tabs_grid_layout_6 = Qt.QGridLayout()
-        self.tabs_layout_6.addLayout(self.tabs_grid_layout_6)
-        self.tabs.addTab(self.tabs_widget_6, 'Auto. Gain Control')
+        self.tabs.addTab(self.tabs_widget_5, 'Auto. Gain Control')
         self.top_layout.addWidget(self.tabs)
         self.mods_mer_measurement_pre_frame_sync = mods.mer_measurement(1024, int(const_order))
         self.frame_synchronizer_0 = mods.frame_synchronizer(
@@ -492,7 +488,7 @@ class rx_lower(gr.top_block, Qt.QWidget):
             self.qtgui_time_agc_rms_val.set_line_alpha(i, alphas[i])
 
         self._qtgui_time_agc_rms_val_win = sip.wrapinstance(self.qtgui_time_agc_rms_val.pyqwidget(), Qt.QWidget)
-        self.tabs_layout_6.addWidget(self._qtgui_time_agc_rms_val_win)
+        self.tabs_layout_5.addWidget(self._qtgui_time_agc_rms_val_win)
         self.qtgui_pmf_peak_vs_time = qtgui.time_sink_f(
         	8*(preamble_size + payload_size), #size
         	sym_rate, #samp_rate
@@ -719,7 +715,7 @@ class rx_lower(gr.top_block, Qt.QWidget):
             self.qtgui_freq_sink_agc_in.set_line_alpha(i, alphas[i])
 
         self._qtgui_freq_sink_agc_in_win = sip.wrapinstance(self.qtgui_freq_sink_agc_in.pyqwidget(), Qt.QWidget)
-        self.tabs_layout_6.addWidget(self._qtgui_freq_sink_agc_in_win)
+        self.tabs_layout_5.addWidget(self._qtgui_freq_sink_agc_in_win)
         self.qtgui_costas_state = qtgui.time_sink_f(
         	8*(preamble_size + payload_size), #size
         	sym_rate, #samp_rate
@@ -895,10 +891,15 @@ class rx_lower(gr.top_block, Qt.QWidget):
         self.mods_da_carrier_phase_rec_0_0 = mods.da_carrier_phase_rec(((1/sqrt(2))*preamble_syms), 0.001, 1/sqrt(2), int(const_order), True, True)
         self.digital_pfb_clock_sync_xxx_0 = digital.pfb_clock_sync_ccf(sps, 2*pi/50, (rrc_taps), nfilts, nfilts/2, pi/8, 1)
         self.digital_costas_loop_cc_0 = digital.costas_loop_cc(2*pi/loopbw, 2**constellation.bits_per_symbol(), False)
-        self.blocks_udp_sink_0 = blocks.udp_sink(gr.sizeof_gr_complex*1, dest_ip, port, payload_size, True)
         self.blocks_rms_xx_1 = blocks.rms_cf(0.0001)
         self.blocks_float_to_complex_0 = blocks.float_to_complex(1)
         self.blocks_divide_xx_0 = blocks.divide_cc(1)
+        self.blks2_tcp_sink_0 = grc_blks2.tcp_sink(
+        	itemsize=gr.sizeof_gr_complex*1,
+        	addr=ip,
+        	port=port,
+        	server=True,
+        )
 
         ##################################################
         # Connections
@@ -921,7 +922,7 @@ class rx_lower(gr.top_block, Qt.QWidget):
         self.connect((self.frame_synchronizer_0, 2), (self.qtgui_pmf_peak_vs_time, 0))
         self.connect((self.frame_synchronizer_0, 3), (self.qtgui_time_sink_x_0_0, 0))
         self.connect((self.frame_synchronizer_0, 4), (self.qtgui_time_sink_x_2, 0))
-        self.connect((self.mods_da_carrier_phase_rec_0_0, 0), (self.blocks_udp_sink_0, 0))
+        self.connect((self.mods_da_carrier_phase_rec_0_0, 0), (self.blks2_tcp_sink_0, 0))
         self.connect((self.mods_da_carrier_phase_rec_0_0, 0), (self.mods_mer_measurement_pre_decoder, 0))
         self.connect((self.mods_da_carrier_phase_rec_0_0, 0), (self.qtgui_const_sink_x_1, 0))
         self.connect((self.mods_da_carrier_phase_rec_0_0, 1), (self.qtgui_time_sink_x_0, 0))
@@ -939,12 +940,6 @@ class rx_lower(gr.top_block, Qt.QWidget):
         self.settings = Qt.QSettings("GNU Radio", "rx_lower")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
-
-    def get_dest_ip(self):
-        return self.dest_ip
-
-    def set_dest_ip(self, dest_ip):
-        self.dest_ip = dest_ip
 
     def get_fft_len(self):
         return self.fft_len
@@ -988,6 +983,12 @@ class rx_lower(gr.top_block, Qt.QWidget):
     def set_gain(self, gain):
         self.gain = gain
         self.rtlsdr_source_0.set_gain(self.gain, 0)
+
+    def get_ip(self):
+        return self.ip
+
+    def set_ip(self, ip):
+        self.ip = ip
 
     def get_loopbw(self):
         return self.loopbw
@@ -1293,9 +1294,6 @@ class rx_lower(gr.top_block, Qt.QWidget):
 def argument_parser():
     parser = OptionParser(usage="%prog: [options]", option_class=eng_option)
     parser.add_option(
-        "", "--dest-ip", dest="dest_ip", type="string", default='',
-        help="Set Destination IP [default=%default]")
-    parser.add_option(
         "", "--fft-len", dest="fft_len", type="intx", default=2048,
         help="Set Carrier Freq. Recovery FFT Size [default=%default]")
     parser.add_option(
@@ -1313,6 +1311,9 @@ def argument_parser():
     parser.add_option(
         "", "--gain", dest="gain", type="intx", default=40,
         help="Set gain [default=%default]")
+    parser.add_option(
+        "", "--ip", dest="ip", type="string", default='',
+        help="Set Local IP [default=%default]")
     parser.add_option(
         "", "--loopbw", dest="loopbw", type="intx", default=100,
         help="Set loopbw [default=%default]")
@@ -1335,7 +1336,7 @@ def main(top_block_cls=rx_lower, options=None):
         Qt.QApplication.setGraphicsSystem(style)
     qapp = Qt.QApplication(sys.argv)
 
-    tb = top_block_cls(dest_ip=options.dest_ip, fft_len=options.fft_len, fllbw=options.fllbw, frame_sync_verbosity=options.frame_sync_verbosity, freq=options.freq, freq_rec_alpha=options.freq_rec_alpha, gain=options.gain, loopbw=options.loopbw, loopbw_0=options.loopbw_0, port=options.port)
+    tb = top_block_cls(fft_len=options.fft_len, fllbw=options.fllbw, frame_sync_verbosity=options.frame_sync_verbosity, freq=options.freq, freq_rec_alpha=options.freq_rec_alpha, gain=options.gain, ip=options.ip, loopbw=options.loopbw, loopbw_0=options.loopbw_0, port=options.port)
     tb.start()
     tb.show()
 
