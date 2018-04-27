@@ -1,7 +1,15 @@
+#!/bin/bash
 
-git clone https://github.com/gr-vt/gr-framers.git
+if [ ! -d "gr-framers" ]; then
+	git clone https://github.com/gr-vt/gr-framers.git
+fi
+
 cd gr-framers
-mkdir build
+
+if [ ! -d "build" ]; then
+	mkdir build
+fi
+
 cd build
 cmake ..
 make
