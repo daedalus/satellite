@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ ! -d "gr-framers" ]; then
-	git clone https://github.com/gr-vt/gr-framers.git
+	git clone https://github.com/igorauad/gr-framers.git --branch public_statistics
 fi
 
 cd gr-framers
