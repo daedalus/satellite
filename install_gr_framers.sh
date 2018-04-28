@@ -15,3 +15,6 @@ cmake ..
 make
 sudo make install
 
+# Create a build record for the Makefile to detect up-to-date build
+cd ../
+touch build_record
